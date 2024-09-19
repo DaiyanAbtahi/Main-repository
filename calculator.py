@@ -10,7 +10,7 @@ def get_num(n : str | float ) -> str | float :
             except:
                 print("INVALID NUMBER.....PLEASE TRY AGAIN")
                 continue
-    return num        
+    return num 
 
 num1 = get_num("first")
 num2 = get_num("second")
@@ -43,4 +43,3 @@ elif op == '/':
                 
 
 print(result)
-
