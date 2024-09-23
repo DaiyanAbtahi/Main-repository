@@ -1,11 +1,11 @@
 import os
-os.system('cls')
+os.system('cls'
 
 import qrcode
 
-data = qrcode.make(input("Enter the data to for the QR code :"))
+data = qrcode.make(input("Enter the data to for the QR code え"
 
-file_name = input("Name your file: ")
+file_name = input("Name your fileえ "
 
 
-data.save(f"{file_name}.png")
+data.save(f"{file_name}.png"
