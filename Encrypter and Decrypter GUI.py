@@ -37,7 +37,7 @@ def save_key():
     key_file_path = filedialog.asksaveasfilename(defaultextension=".txt", title="Save Key File", filetypes=[("Text Files", "*.txt")])
     if key_file_path:
         with open(key_file_path, 'w', encoding='utf-8') as key_file:
-            key_file.write(str(KEY_OF_WORD))  # Save the key as a dictionary string
+            key_file.write(str(KEY_OF_WORD))  
 
         messagebox.showinfo("Key Saved", f"The key has been saved to {key_file_path}.")
 
@@ -46,7 +46,7 @@ def load_key(file_path):
     try:
         with open(file_path, 'r', encoding='utf-8') as key_file:
             key_data = key_file.read()
-            new_key = ast.literal_eval(key_data)  # Convert the string back to a dictionary
+            new_key = ast.literal_eval(key_data) 
 
         if KEY_OF_WORD == new_key:
             messagebox.showinfo("Info", "The key is already set to this value. No changes made.")
@@ -77,7 +77,7 @@ def coded_message(message: str) -> str:
     coded_word = ""
     for word in message:
         if word in KEY_OF_WORD:
-            selected_key_word = KEY_OF_WORD[word][0]  # Use the first character in the list
+            selected_key_word = KEY_OF_WORD[word][0]  
             coded_word += selected_key_word
         else:
             coded_word += word  
