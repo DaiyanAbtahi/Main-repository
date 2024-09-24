@@ -15,6 +15,7 @@ ENTRY_FG_COLOR = "#FFFFFF"
 
 def create_key():
     global KEY_OF_WORD
+    
     extra_characters = list('あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんがぎぐげごабвгдежзийклмнопрстуфхцчшщъыьэюяАБВГДЕЖЗИЙКЛМНОПРСТ')
     
     characters = string.ascii_letters + string.digits + string.punctuation + ' ' + '\n' + ''.join(extra_characters)
@@ -120,8 +121,11 @@ def encrypt_file():
         try:
             with open(file_path, 'r', encoding='utf-8') as file:
                 content = file.read()
+
+            # Encrypt the file content
             encrypted_content = coded_message(content)
 
+            # Overwrite the original file with the encrypted content
             with open(file_path, 'w', encoding='utf-8') as file:
                 file.write(encrypted_content)
 
@@ -137,14 +141,18 @@ def decrypt_file():
         try:
             with open(file_path, 'r', encoding='utf-8') as file:
                 content = file.read()
+
+            # Decrypt the file content
             decrypted_content = decoded_message(content)
 
+            # Overwrite the original file with the decrypted content
             with open(file_path, 'w', encoding='utf-8') as file:
                 file.write(decrypted_content)
 
             messagebox.showinfo("Success", f"File '{file_path}' has been decrypted.")
         except Exception as e:
             messagebox.showerror("Error", str(e))
+
 
 def clear_text():
     input_text_box.delete("1.0", tk.END)

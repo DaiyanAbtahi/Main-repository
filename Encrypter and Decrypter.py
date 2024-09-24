@@ -2,7 +2,7 @@ import random
 import os
 import string
 
-KEY_OF_WORD: dict[str, list] | None = None # insert Key of word here
+KEY_OF_WORD: dict[str, list] | None = {'a': ['!', 'В'], 'b': ['й', ' '], 'c': ['$', 'い'], 'd': ['Б', 'ф'], 'e': ['し', '0'], 'f': ['た', 't'], 'g': ['お', 'Q'], 'h': ['に', 'N'], 'i': ['ъ', 'ю'], 'j': ['ぐ', 'г'], 'k': ['G', 'S'], 'l': [']', 'к'], 'm': [',', 'Y'], 'n': ['и', 'u'], 'o': ['w', 'з'], 'p': ['п', 'な'], 'q': ['[', '3'], 'r': ['の', 'g'], 's': ['こ', 'Д'], 't': ['щ', 'ら'], 'u': ['そ', 'ふ'], 'v': ['を', 'о'], 'w': ['6', '\n'], 'x': ['ч', 'ろ'], 'y': ['/', 'ち'], 'z': ['す', 'や'], 'A': ['Р', 'Е'], 'B': ['5', 'k'], 'C': ['.', 'p'], 'D': ['Ж', 'y'], 'E': ['ほ', '-'], 'F': ['よ', 'V'], 'G': ['`', 'З'], 'H': ['с', 'れ'], 'I': ['^', 'x'], 'J': ['T', 'う'], 'K': ['c', 'み'], 'L': ['х', 'т'], 'M': ['+', '&'], 'N': [' ご', 'б'], 'O': ['<', '?'], 'P': ['Г', 'て'], 'Q': ['C', 'О'], 'R': ['у', '"'], 'S': ['a', ')'], 'T': ['\\', 'F'], 'U': ['b', 'h'], 'V': ['А', 'る'], 'W': ['ま', 'と'], 'X': ['I', '#'], 'Y': ['а', 'f'], 'Z': ['ん', '='], '0': ['>', 'i'], '1': ['ы', 'л'], '2': ['я', 'o'], '3': ['む', 'e'], '4': ['z', 'J'], '5': ['く', '('], '6': ['Л', 'D'], '7': ['P', 'E'], '8': [';', 'д'], '9': ['は', 'W'], '!': ['け', "'"], '"': ['ш', 'R'], '#': ['р', 'd'], '$': ['М', 'n'], '%': ['8', 'き'], '&': ['わ', 'め'], "'": ['|', 'B'], '(': ['{', 'が'], ')': ['l', 'm'], '*': ['A', '~'], '+': ['7', 'ゆ'], ',': ['へ', '*'], '-': ['И', 'э'], '.': ['2', '@'], '/': ['r', 'あ'], ':': ['П', '%'], ';': ['U', 'в'], '<': ['н', 'げ'], '=': ['Z', 'つ'], '>': ['ね', 'j'], '?': ['_', 'м'], '@': ['K', 'е'], '[': ['1', 'Т'], '\\': ['ぬ', ':'], ']': ['q', 'Н'], '^': ['ひ', 'も'], '_': ['v', 'К'], '`': ['ь', 'H'], '{': ['С', 'り'], '|': ['さ', 'ц'], '}': ['X', 'え'], '~': ['O', '9'], ' ': ['s', 'せ'], '\n': ['L', '4']}
 
 
 def create_key() -> None:
@@ -16,7 +16,7 @@ def create_key() -> None:
     index: int = 0
     
     for alphabet in alphabet_code:
-        for i in range(0,3):
+        for i in range(0,2):
             alphabet_code[alphabet].append(character_list[index])
             index += 1
     print(alphabet_code)
@@ -51,35 +51,49 @@ def decoded_message(message: str) -> str:
 
 def code_file(file_path: str) -> None:
     try:
-        with open(file_path, encoding='utf-8') as file:
+        with open(file_path, 'r', encoding='utf-8') as file:
             txt_data: str = file.read()
-            word_list: list = list(txt_data)
-            coded_word: str = ""
-        for word in word_list:
-            selected_word = None
-            selected_word = random.choice(KEY_OF_WORD[word])
-            coded_word += selected_word
-            
-        with open(file_path, "w", encoding='utf-8') as write_code:
+
+        coded_word: str = ""
+        for word in txt_data:
+            if word in KEY_OF_WORD:
+                selected_word = random.choice(KEY_OF_WORD[word])
+                coded_word += selected_word
+            else:
+                # Handle characters that aren't in the dictionary (optional, log or skip)
+                coded_word += word  # Keeping unknown characters as they are
+                
+        with open(file_path, 'w', encoding='utf-8') as write_code:
             write_code.write(coded_word)
-        print(f"File name {file_path} has now been encrypted.")
-    except:
-        print('\nERROR_\n')
-        quit()
+        
+        print(f"File {file_path} has been encrypted successfully.")
     
-def decode_file(file_path: str)-> None:
+    except Exception as e:
+        print(f"Error encrypting file: {e}")
+
+def decode_file(file_path: str) -> None:
     try:
-        with open(file_path, encoding='utf-8') as f:
+        with open(file_path, 'r', encoding='utf-8') as f:
             txt_data: str = f.read()
-            txt_data = decoded_message(txt_data)
-            decoded_word: str = txt_data
-            
-        with open(file_path, "w", encoding='utf-8') as write_code:
+        
+        decoded_word: str = ""
+        for coded_word in txt_data:
+            found = False
+            for word, codes in KEY_OF_WORD.items():
+                if coded_word in codes:
+                    decoded_word += word
+                    found = True
+                    break
+            if not found:
+                decoded_word += coded_word  # Keep unknown characters as they are
+
+        with open(file_path, 'w', encoding='utf-8') as write_code:
             write_code.write(decoded_word)
-        print(f"File name {file_path} has now been decrypted.")
-    except:
-        print('\nERROR_\n')
-        quit()
+        
+        print(f"File {file_path} has been decrypted successfully.")
+    
+    except Exception as e:
+        print(f"Error decrypting file: {e}")
 
 if __name__ == "__main__":
     os.system('cls')
