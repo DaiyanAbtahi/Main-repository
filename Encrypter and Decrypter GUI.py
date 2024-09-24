@@ -25,7 +25,7 @@ def create_key():
     # Create a key as a dictionary of lists
     KEY_OF_WORD = {char: [character_list[i], character_list[i + len(characters) // 2]] for i, char in enumerate(characters) if i < len(character_list) // 2}
 
-    key_status_label.config(text="Key Status: Key is SET", fg="green")
+    key_status_label.config(text="Key Status: Key is SET", fg="#00FF00")
     set_key_button.config(text="Change Key", command=set_key)
     messagebox.showinfo("Key Created", "The key has been generated. You can now save it.")
 
