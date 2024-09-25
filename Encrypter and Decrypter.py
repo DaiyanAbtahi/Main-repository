@@ -16,11 +16,10 @@ def create_key() -> None:
     index: int = 0
     
     for alphabet in alphabet_code:
-        for i in range(0,2):
+        for _ in range(2):
             alphabet_code[alphabet].append(character_list[index])
             index += 1
     print(alphabet_code)
-
 
 def coded_message(message: str) -> str:
     try:
