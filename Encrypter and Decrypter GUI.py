@@ -1,6 +1,6 @@
 import random
 import string
-import customtkinter as tk
+import tkinter as tk
 from tkinter import scrolledtext, messagebox, filedialog
 import ast
 
