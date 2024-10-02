@@ -59,8 +59,7 @@ def code_file(file_path: str) -> None:
                 selected_word = random.choice(KEY_OF_WORD[word])
                 coded_word += selected_word
             else:
-                # Handle characters that aren't in the dictionary (optional, log or skip)
-                coded_word += word  # Keeping unknown characters as they are
+                coded_word += word  
                 
         with open(file_path, 'w', encoding='utf-8') as write_code:
             write_code.write(coded_word)
