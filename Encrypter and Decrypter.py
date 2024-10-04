@@ -52,7 +52,6 @@ def code_file(file_path: str) -> None:
     try:
         with open(file_path, 'r', encoding='utf-8') as file:
             txt_data: str = file.read()
-
         coded_word: str = ""
         for word in txt_data:
             if word in KEY_OF_WORD:
