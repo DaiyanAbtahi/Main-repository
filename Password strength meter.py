@@ -1,3 +1,4 @@
+import os
 import re
 import math
 import string
@@ -85,6 +86,7 @@ def suggest_improvements(password):
 
 
 def main():
+    os.system('cls')
     print(" Password Strength Checker \n")
     password = input("Enter your password: ")
 
