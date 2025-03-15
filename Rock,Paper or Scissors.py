@@ -3,7 +3,6 @@ import random
 
 
 def get_player_choice():
-    """Get a valid choice from the player."""
     choices = ["Rock", "Paper", "Scissors"]
     while True:
         player = input("🪨 Rock, 📄 Paper, ✂️ Scissors? (or type 'End' to quit): ").capitalize()
@@ -13,7 +12,6 @@ def get_player_choice():
 
 
 def play_round(player_choice, computer_choice):
-    """Play a single round and determine the result."""
     if player_choice == computer_choice:
         return "Tie", "It's a tie! "
     

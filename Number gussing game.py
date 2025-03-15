@@ -3,7 +3,6 @@ import random
 
 
 def get_user_guess(low, high):
-    """Prompt the user for a valid number within the range."""
     while True:
         try:
             guess = int(input(f"🔢 Enter a number between {low} and {high}: "))
@@ -11,7 +10,7 @@ def get_user_guess(low, high):
                 return guess
             else:
                 print(f" Please enter a number within the range {low}-{high}.")
-        except ValueError:
+        except :
             print("Invalid input. Please enter a valid number.")
 
 
