@@ -7,7 +7,7 @@ def get_num(n: str) -> float:
         try:
             num = float(input(f"Enter the {n} number: "))
             return num
-        except ValueError:
+        except :
             print("\nINVALID NUMBER.....PLEASE TRY AGAIN\n")
 
 
